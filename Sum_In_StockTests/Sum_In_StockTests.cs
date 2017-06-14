@@ -37,11 +37,12 @@ namespace Sum_In_Stock.Tests
             //act
             getInStock.SetFakeData(_fackData);
 
-            List<int> excepted = new List<int>() { 6, 15, 24, 15 };
+            List<int> expected = new List<int>() { 6, 15, 24, 15 };
             List<int> actual = getInStock.sumValue(3, "Cost");
 
             //assert
-            Assert.AreEqual(excepted,actual);
+            CollectionAssert.AreEquivalent(expected, actual);
+
         }
 
         [TestMethod()]
@@ -51,28 +52,38 @@ namespace Sum_In_Stock.Tests
 
             getInStock.SetFakeData(_fackData);
 
-            List<int> excepted = new List<int>() { 50, 66, 60 };
+            List<int> expected = new List<int>() { 50, 66, 60 };
             List<int> actual = getInStock.sumValue(4, "Revenue");
 
-            Assert.AreEqual(excepted, actual);
+            CollectionAssert.AreEquivalent(expected, actual);
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
         public void Count_is_0_Column_is_Revenue_and_Return_is_Argument_Exception()
         {
-            Assert.Fail();
+            var getInStock = new GetFackInStock();
+            getInStock.SetFakeData(_fackData);
+            getInStock.sumValue(0, "Revenue");
+            
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
         public void Count_is_Negative_1_Column_is_Revenue_and_Return_is_Argument_Exception()
         {
-            Assert.Fail();
+            var getInStock = new GetFackInStock();
+            getInStock.SetFakeData(_fackData);
+            getInStock.sumValue(-1, "Revenue");
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
         public void Count_is_3_Column_is_Not_in_DB_and_Return_is_Argument_Exception()
         {
-            Assert.Fail();
+            var getInStock = new GetFackInStock();
+            getInStock.SetFakeData(_fackData);
+            getInStock.sumValue(-1, "Bonus");
         }
     }
 

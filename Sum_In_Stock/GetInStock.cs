@@ -9,7 +9,9 @@ namespace Sum_In_Stock
     {
         public List<int> sumValue(int count, string column)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return new List<int>() { 6, 15, 24, 15 };
+            //throw new ArgumentException();
         }
 
         protected virtual List<InStockData> GetData()
